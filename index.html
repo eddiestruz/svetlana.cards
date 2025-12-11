@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Svetlana – Светлана | Гадание на картах в Рамат-Гане</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Montserrat+Alternates:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="favicon.png?v=2">
+
+<style>
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 600px) {
+
+    .opening-title {
+        font-size: 2.6rem;        /* קטן יותר אך עדיין יוקרתי */
+        line-height: 1.25;
+        letter-spacing: 2px;
+        padding: 0 10px;
+    }
+
+    .opening-sub {
+        font-size: 1.15rem;
+        line-height: 1.7;
+        padding: 0 10px;
+    }
+
+    .section {
+        padding: 18px;
+    }
+
+    h2 {
+        font-size: 1.55rem;
+        padding-left: 8px;
+        border-left-width: 3px;
+    }
+
+    header {
+        padding: 12px 20px;
+    }
+
+    header h1 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+
+    .header-profile {
+        width: 45px;
+        height: 45px;
+    }
+
+    /* MOBILE GALLERY full image no cut */
+    .gallery-img {
+        flex: 0 0 90%;
+        max-width: 90%;
+        height: auto;
+        max-height: 300px;
+        border-radius: 14px;
+        object-fit: contain;     /* No crop on mobile */
+        background: rgba(255,255,255,0.05);
+        padding: 8px;
+        border: 1px solid rgba(255,255,255,0.25);
+        scroll-snap-align: center;
+    }
+
+    .service-card {
+        padding: 18px;
+    }
+
+    .review-big {
+        font-size: 1.15rem;
+        line-height: 1.6;
+    }
+
+    .cta-btn {
+        font-size: 1.05rem;
+        padding: 12px 22px;
+    }
+}
+
+
+/* RESET LINKS */
+a { text-decoration: none !important; }
+
+.opening-title {
+    font-family: 'Poiret One', cursive;
+    font-size: 4.4rem;
+    font-weight: 900;
+    letter-spacing: 3.5px;
+    text-align: center;
+    color: #f3dd9a;
+    margin: 10px 0 20px 0;
+    text-shadow: 0 0 26px rgba(243,221,154,0.65);
+    line-height: 1.2;
+}
+
+/* BODY */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    background-image: url('images.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body::before {
+    content:"";
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(10, 0, 30, 0.65);
+    backdrop-filter: blur(4px);
+    z-index:-1;
+}
+
+/* HEADER */
+header {
+    padding: 18px 28px;
+    background: rgba(50,20,80,0.75);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+}
+
+.header-flex {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.header-icon {
+    font-size: 2rem;
+    color: #f3dd9a;
+}
+
+.header-profile {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid #d3b46c;
+    object-fit: cover;
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* MAIN CONTAINER */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* SECTION BOXES */
+.section {
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    border-radius: 16px;
+    margin-top: 25px;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(5px);
+}
+
+/* SECTION TITLE */
+h2 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    color: #f3dd9a;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    border-left: 4px solid #d3b46c;
+    padding-left: 12px;
+}
+
+/* SUBTEXT */
+.opening-sub {
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+/* CTA BUTTON */
+.cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #d3b46c, #ffe4a8);
+    color: #2b1a40;
+    font-size: 1.15rem;
+    padding: 14px 26px;
+    border-radius: 50px;
+    font-weight: 700;
+    margin-top: 18px;
+}
+
+/* SERVICES */
+.services-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px,1fr));
+    gap: 22px;
+}
+
+.service-card {
+    background: rgba(255,255,255,0.14);
+    border-radius: 18px;
+    padding: 22px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.service-icon {
+    font-size: 2.7rem;
+    color: #f3dd9a;
+    margin-bottom: 8px;
+}
+
+.service-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #f3dd9a;
+}
+
+.service-desc {
+    font-size: 1.15rem;
+    line-height: 1.65;
+}
+
+
+/* REVIEWS */
+.review-big {
+    background: rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 18px;
+    font-size: 1.2rem;
+    line-height: 1.65;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* ADD REVIEW BUTTON */
+.add-review-btn {
+    padding: 14px 22px;
+    background: linear-gradient(135deg,#d3b46c,#ffe4a8);
+    color: #2b1a40;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* POPUP */
+.popup-overlay {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+    backdrop-filter: blur(5px);
+    z-index:9999;
+}
+
+.popup {
+    background:#1d0f2f;
+    padding:28px;
+    border-radius:18px;
+    width:90%;
+    max-width:420px;
+    border:1px solid rgba(255,255,255,0.3);
+}
+
+.popup input, .popup textarea {
+    width:100%;
+    padding:12px;
+    font-size:1.1rem;
+    border-radius:8px;
+    margin-bottom:15px;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.08);
+    color:#fff;
+}
+
+.popup button {
+    width:100%;
+    padding:14px;
+    font-size:1.2rem;
+    border-radius:40px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#d3b46c,#ffe4a8);
+    color:#2b1a40;
+}
+
+.gallery-container {
+    max-width: 900px;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 25px rgba(255,255,255,0.15);
+}
+
+.gallery-slide {
+    display: none;
+    width: 100%;
+    height: 520px;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: fadein 0.8s ease;
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: scale(1.03); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* Prev/Next buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 55px;
+    height: 55px;
+    margin-top: -30px;
+    color: white;
+    font-size: 26px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: 0.3s;
+}
+
+.prev:hover, .next:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* Dots */
+.gallery-dots {
+    text-align: center;
+    padding: 12px 0;
+}
+
+.dot {
+    cursor: pointer;
+    height: 14px;
+    width: 14px;
+    margin: 0 6px;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.active {
+    background-color: #ffe4a8;
+}
+
+/* Title */
+.title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #f3dd9a;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .gallery-container {
+        max-width: 95%;
+        margin-top: 25px;
+    }
+    .gallery-slide {
+        height: 360px;
+    }
+    .title {
+        font-size: 1.8rem;
+    }
+}
+</style>
+
+<script>
+
+let slideIndex = 1;
+
+document.addEventListener("DOMContentLoaded", function () {
+    showSlides(slideIndex);
+});
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("gallery-slide");
+    let dots = document.getElementsByClassName("dot");
+    
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
+    
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    for (i = 0; i < dots.length; i++) {
+        dots[i].classList.remove("active");
+    }
+    
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].classList.add("active");
+}
+
+function openReviewPopup() {
+    document.getElementById("reviewPopup").style.display = "flex";
+}
+function closeReviewPopup() {
+    document.getElementById("reviewPopup").style.display = "none";
+}
+function sendReview() {
+    let phone = document.getElementById("reviewPhone").value.trim();
+    let text = document.getElementById("reviewText").value.trim();
+
+    if (!phone || !text) {
+        alert("Пожалуйста, заполните телефон и текст.");
+        return;
+    }
+
+    alert("Спасибо! Отзыв появится после одобрения.");
+
+    let msg = encodeURIComponent(
+        "Новый отзыв с сайта Светланы:\n\n" +
+        "Телефон: " + phone + "\n" +
+        "Отзыв:\n" + text
+    );
+
+    window.open("https://wa.me/972506403106?text=" + msg, "_blank");
+    closeReviewPopup();
+}
+</script>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="header-flex">
+        <div class="header-icon">🔮</div>
+        <img src="profile.png" class="header-profile">
+        <h1>Svetlana • Светлана | <a href="https://wa.me/972506403106" style="color:#f3dd9a;">050-6403106</a></h1>
+    </div>
+</header>
+
+<div class="container">
+
+<!-- OPENING -->
+<section class="section">
+    <h2>Добро пожаловать</h2>
+
+<div class="opening-title">
+
+Приветствую вас. Я Светлана ✨
+
+</div>
+
+    <p class="opening-sub">
+
+Я помогаю людям находить честные ответы, понимать свои эмоции и видеть ситуацию шире и глубже, чем кажется на первый взгляд.
+Со мной вы сможете спокойно разобрать то, что тревожит сердце, и почувствовать уверенность в своём пути.
+Мы вместе раскроем скрытые влияния, эмоциональные узлы и тонкие сигналы, которые не всегда заметны.
+Я помогу увидеть то, что скрыто в неизвестном, понять истинные мотивы - свои и других людей - и разобраться в отношениях, которые вызывают вопросы.
+
+Принимаю у себя в Рамат-Гане - в тёплой, безопасной атмосфере, или провожу консультации по телефону, если вам так удобнее.
+
+    </p>
+
+<div class="opening-title">
+Принимаю у себя в Рамат-Гане 🔮
+</div>
+
+    <div style="text-align:center;">
+        <a class="cta-btn" href="https://wa.me/972506403106">Написать в WhatsApp 📱</a>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+    <h2>Услуги и цены</h2>
+
+    <div class="services-section">
+
+        <div class="service-card">
+            <div class="service-icon">🏠</div>
+            <div class="service-price">150–200 ₪</div>
+            <div class="service-desc">
+Личная встреча у меня дома - глубокая и тёплая работа с картами.
+На консультации мы уделим 45–60 минут тому, чтобы подробно разобрать вашу ситуацию, понять корень вопросов и увидеть реальные направления, которые открывают карты.
+Вы получите ясность, поддержку и ответы, которые помогут чувствовать себя увереннее.
+            </div>
+            <a class="cta-btn" href="https://wa.me/972506403106">Записаться 🕯️</a>
+        </div>
+
+       
+        </div>
+
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section">
+    <h2>Галерея</h2>
+
+<div class="gallery-container">
+
+    <div class="gallery-slide">
+        <img src="1.jpeg">
+    </div>
+
+    <div class="gallery-slide">
+        <img src="2.jpeg">
+    </div>
+
+    <div class="gallery-slide">
+        <img src="3.jpeg">
+    </div>
+
+    <div class="gallery-slide">
+        <img src="4.jpeg">
+    </div>
+
+    <div class="gallery-slide">
+        <img src="5.png">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+</div>
+
+<div class="gallery-dots">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+</div>
+</section>
+
+<!-- REVIEWS -->
+
+<section class="section" id="reviews">
+    <h2>Отзывы</h2>
+
+    <!-- RUSSIAN REVIEWS -->
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            “Пришла к Светлане в состоянии полной растерянности.
+            Она внимательно выслушала меня и объяснила, что показывают карты  
+            спокойно, мягко и без давления. Было ощущение, что она видит ситуацию
+            глубже, чем я сама. После консультации я впервые за долгое время
+            почувствовала уверенность и внутреннее спокойствие. Советы оказались
+            не просто верными   они реально помогли изменить мою ситуацию.”
+              Ольга, Рамат-Ган
+        </p>
+    </div>
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            “Светлана говорит честно, но с большой душой и тактом.
+            Расклад был настолько точным, что временами казалось,
+            будто она знает меня давно. Особенно важно то, что она не
+            обещает чудес, а объясняет реальные варианты и направления,
+            которые открывают карты. После встречи я поняла, куда двигаться
+            и как перестать повторять старые ошибки. Теперь обращаюсь только к ней.”
+              Мария, Тель-Авив
+        </p>
+    </div>
+	
+	    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐</div>
+        <p>
+            “הפגישה הייתה מקצועית, רגועה ומדויקת.
+            סבטלנה הסבירה כל פרט בבהירות,
+            ונתנה לי להבין מה נכון לחזק ומה כדאי לשחרר.
+            היא לא שופטת ולא לוחצת   רק מאירה.
+            יצאתי עם תחושת רוגע ואופטימיות.”
+              מיכל, גבעתיים
+        </p>
+    </div>
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            “Удивительно точный расклад! Пришла с вопросом о работе,
+            а получила гораздо больше   понимание, что мешает мне развиваться.
+            Светлана объяснила каждую карту так, что всё стало логичным.
+            Послевкусие было как после хорошей терапии   лёгкость и ясность.
+            Обязательно приду снова.”
+              Ирина, Бат-Ям
+        </p>
+    </div>
+	
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐</div>
+        <p>
+            “Консультация была глубокая и очень содержательная.
+            Светлана быстро перешла к сути и помогла увидеть то,
+            что я долго игнорировала. Услышала я не всё приятное,
+            но именно это помогло трезво взглянуть на ситуацию.
+            После разговора многое встало на свои места, и стало намного легче.”
+              Екатерина, Беэр-Шева
+        </p>
+    </div>
+
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            “Со Светланой почувствовала себя в полной безопасности.
+            У неё невероятная интуиция и способность объяснять сложноe простыми словами.
+            Карты показали всё, что я не решалась признать. Её советы практичны,
+            тёплые и очень мудрые. Спасибо ей за поддержку и ясность.”
+              Валерия, Холон
+        </p>
+    </div>
+	
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐</div>
+        <p>
+            “Я обращалась во многие места, но здесь впервые почувствовала искренность.
+            Светлана не пыталась угодить, а говорила так, как есть  
+            спокойно, честно и с большим уважением. Да, услышать было непросто,
+            но это было нужно. После встречи стало легче принимать решения.”
+              Наталья, Гиватаим
+        </p>
+    </div>
+
+    <!-- HEBREW REVIEWS -->
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            “הגעתי לסבטלנה אחרי תקופה של בלבול וחוסר יציבות.
+            היא הקשיבה בצורה עמוקה ומכילה, ונתנה תחושה שממש מבינים אותי.
+            הפתיחה הייתה מדויקת בצורה יוצאת דופן ונגעה בדיוק בדברים
+            שלא הצלחתי לנסח בעצמי. יצאתי עם בהירות חדשה וכלים להתמודד.
+            ממליצה מכל הלב.”
+              דנה, רמת גן
+        </p>
+    </div>
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐</div>
+        <p>
+            “סבטלנה מדברת בגובה העיניים, בכנות ובשקט שמרגיע את הלב.
+            היא לא מייפה את המציאות אבל גם לא מפחידה,
+            אלא מסבירה מה באמת קורה ומה האפשרויות שעומדות מולי.
+            קיבלתי ממנה כיוון ברור ואומץ לשנות דברים
+            שדחיתי הרבה זמן.”
+              יעל, תל אביב
+        </p>
+    </div>
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            “באתי לשאלה אחת, ויצאתי עם תובנות על כל החיים שלי.
+            סבטלנה רואה לעומק, מדברת בעדינות אבל לא מפספסת שום דבר.
+            היא הראתה לי דפוסים שחוזרים אצלי ושאני לא מבחינה בהם.
+            קיבלתי ממנה הכוונה שממש פתחה לי את הראש.
+            ממליצה בחום רב.”
+              טלי, ראשון לציון
+        </p>
+    </div>
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>
+            “סבטלנה משלבת אינטואיציה חזקה עם גישה מאוד אנושית.
+            היא הצליחה לנסח את מה שהרגשתי במשך חודשים.
+            השיחה איתה הייתה כמו מפגש עם מישהי שרואה את התמונה
+            במלואה ויודעת להסביר אותה בצורה עדינה וברורה.
+            קיבלתי ממנה כוח להתקדם.”
+              רינת, חולון
+        </p>
+    </div>
+
+    <div class="review-big">
+        <div class="stars">⭐⭐⭐⭐</div>
+        <p>
+            “פגישה מלאה בתובנות חשובות.
+            הרגשתי שסבטלנה מבינה בדיוק איפה אני נמצאת,
+            ומצליחה לכוון בלי להטיף. הפתיחה הייתה מדויקת,
+            והמילים שלה נשארו איתי ימים אחרי.
+            בהחלט אחזור שוב.”
+              אילנה, בת ים
+        </p>
+    </div>
+
+
+    <!-- ADD REVIEW BUTTON -->
+    <div style="text-align:center; margin-top:25px;">
+        <div class="add-review-btn" onclick="openReviewPopup()">
+            Добавить отзыв ✍️
+        </div>
+    </div>
+
+</section>
+
+
+<!-- POPUP -->
+<div class="popup-overlay" id="reviewPopup">
+    <div class="popup">
+        <h3 style="color:#f3dd9a; font-family:'Montserrat Alternates';">Оставить отзыв</h3>
+
+        <input id="reviewPhone" type="text" placeholder="Телефон">
+        <textarea id="reviewText" rows="4" placeholder="Ваш отзыв..."></textarea>
+
+        <button onclick="sendReview()">Отправить</button>
+        <button onclick="closeReviewPopup()" style="background:#555; margin-top:10px; color:white;">Отмена</button>
+    </div>
+</div>
+
+    <div style="text-align:center;">
+        <a class="cta-btn" href="https://wa.me/972506403106">Написать в WhatsApp 📱</a>
+    </div>
+	
+</div>
+
+</body>
+</html>
