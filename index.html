@@ -521,7 +521,9 @@
 // ===============================
 function openReviewPopup() {
     document.getElementById("reviewPopup").style.display = "flex";
+	sendClick('reviewPopup','msg')
 }
+
 function closeReviewPopup() {
     document.getElementById("reviewPopup").style.display = "none";
 }
@@ -556,9 +558,6 @@ async function sendReview() {
 	closeReviewPopup();
 }
 
-async function incrementEnter(silent = false) {
-
-    // collect device/client data
     const deviceInfo = {
         userAgent: navigator.userAgent,
         platform: navigator.platform,
@@ -567,6 +566,10 @@ async function incrementEnter(silent = false) {
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         date: new Date().toISOString()
     };
+
+
+async function incrementEnter(silent = false) {
+
 
     const response = await fetch(`${API}/enter`, {
         method: "POST",
@@ -584,6 +587,45 @@ async function incrementEnter(silent = false) {
     }
 }
 
+function sendClick(clickName, message) {
+	const payload = {
+		clickName,
+		message: typeof message === 'string'
+		  ? message
+		  : JSON.stringify(message),
+
+		deviceInfo: JSON.stringify(deviceInfo),
+
+		date: new Date().toISOString()
+	  };
+
+  console.log("SENDING CLICK:", payload);
+
+  fetch(`${API}/click`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(r => {
+    console.log("CLICK RESPONSE STATUS:", r.status);
+    return r.text();
+  })
+  .then(t => console.log("CLICK RESPONSE BODY:", t))
+  .catch(err => console.error("CLICK ERROR:", err));
+}
+
+function onWhatsappClick(clickName, e) {
+  e.preventDefault();
+
+  sendClick(clickName, deviceInfo);
+
+  window.open(e.currentTarget.href,'_blank'
+  );
+}
+
+
 </script>
 </head>
 <body onload="incrementEnter(true)">
@@ -598,8 +640,9 @@ async function incrementEnter(silent = false) {
             <span>Рамат-Ган • WhatsApp:
 				<a class="phone-link"
 				   href="https://wa.me/972506403106?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BF%D0%BE%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0%D0%BC"
-				   target="_blank">
-				   050-640-3106
+				   target="_blank"
+				   onclick="onWhatsappClick('Светлана - расклад карт', event)">
+				   0506-403-106
 				</a>
             </span>
         </h1>
@@ -633,12 +676,12 @@ async function incrementEnter(silent = false) {
         </div>
 
         <div class="cta-wrap">		
-			<a lass="cta-btn"
+			<a class="cta-btn"
 			   href="https://wa.me/972506403106?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BF%D0%BE%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0%D0%BC"
-			   target="_blank">
+			   target="_blank"
+			   onclick="onWhatsappClick('Записаться на встречу в WhatsApp',event)">
 				Записаться на встречу в WhatsApp
 			</a>
-
         </div>
     </section>
 
@@ -683,10 +726,11 @@ async function incrementEnter(silent = false) {
                     что сейчас влияет на ваше состояние и к чему идут события.
                 </div>
 		
-				<a class="cta-btn"
-			   href="https://wa.me/972506403106?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BF%D0%BE%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0%D0%BC"
-			   target="_blank">
-					Записаться на личную встречу 🕯️			
+		
+				<a class="cta-btn" href="https://wa.me/972506403106?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BF%D0%BE%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0%D0%BC"
+			   target="_blank"
+			   onclick="onWhatsappClick('Записаться на личную встречу 🕯️',event)">
+				Записаться на встречу в WhatsApp
 				</a>
 			
             </div>
@@ -876,7 +920,8 @@ async function incrementEnter(silent = false) {
 			
 			<a class="cta-wrap"
 			   href="https://wa.me/972506403106?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BF%D0%BE%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0%D0%BC"
-			   target="_blank">
+			   target="_blank"
+			   onclick="onWhatsappClick="sendClick('Написать Светлане в WhatsApp 📱️',deviceInfo)">
 			    Написать Светлане в WhatsApp 📱
 			</a>
 
