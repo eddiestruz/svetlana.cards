@@ -23,6 +23,63 @@
             color: inherit;
         }
 
+/* STICKY WHATSAPP CTA – MOBILE ONLY */
+.sticky-whatsapp {
+    display: none;
+}
+
+.cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.secondary-cta {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 18px;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #dddddd;
+
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    text-decoration: none;
+
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.secondary-cta:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.6);
+}
+
+@media (max-width: 768px) {
+    .sticky-whatsapp {
+        position: fixed;
+        bottom: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+
+        background: linear-gradient(135deg,#25D366,#1ebe5d);
+        color: #fff;
+        padding: 14px 22px;
+        border-radius: 999px;
+        font-size: 1.15rem;
+        font-weight: 700;
+        box-shadow: 0 0 18px rgba(0,0,0,0.45);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
@@ -625,6 +682,65 @@ function onWhatsappClick(clickName, e) {
   );
 }
 
+const sessionId = crypto.randomUUID();
+const pageStart = Date.now();
+
+function trackClick(name, message = '') {
+    fetch('/api/click', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+            clickName: name,
+            message: message
+        })
+    });
+}
+
+function trackGallery(direction) {
+    sendClick('Gallery arrow', direction);
+    plusSlides(direction === 'next' ? 1 : -1);
+}
+
+function trackGalleryDot(n) {
+    sendClick('Gallery dot', `slide_${n}`);
+    currentSlide(n);
+}
+
+let maxScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const scrolled = Math.round(
+        (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100
+    );
+
+    if (scrolled > maxScroll && scrolled % 25 === 0) {
+        maxScroll = scrolled;
+        sendClick('Scroll depth', `${scrolled}%`);
+    }
+});
+
+let timeSpent = 0;
+const maxTime = 60;      
+const tick = 10;
+
+const timeInterval = setInterval(() => {
+    timeSpent += tick;
+
+    sendClick(
+        'Time on page',
+        `${timeSpent}s`
+    );
+
+    if (timeSpent >= maxTime) {
+        clearInterval(timeInterval);
+        sendClick('Time tracking done', '60s reached');
+    }
+}, tick * 1000);
+
+</script>
+
+
 
 </script>
 </head>
@@ -653,40 +769,60 @@ function onWhatsappClick(clickName, e) {
 
     <!-- HERO -->
     <section class="section" id="hero">
-        <h2 class="section-title">Добро пожаловать</h2>
 
         <div class="opening-title">
-            Тёплый и Глубокий расклад карт - который помогает увидеть истину без страха
+            Тёплый и Глубокий расклад карт - чтобы увидеть истину без страха
         </div>
 
-        <p class="opening-sub">
-            Иногда внутри много вопросов, а ответов почти нет - только тревога, сомнения и ощущение,
-            что «что-то не так», но трудно понять, что именно.
-            На личной встрече мы в спокойной атмосфере смотрим на вашу ситуацию через расклад карт:
-            видим скрытые влияния, эмоциональные узлы, реальные тенденции и возможные направления.
-        </p>
+        <div class="cta-wrap">		
+			<a class="cta-btn"
+			   href="https://wa.me/972506403106?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BF%D0%BE%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0%D0%BC"
+			   target="_blank"
+			   onclick="onWhatsappClick('Написать и задать вопрос в WhatsApp',event)">
+				Записаться на личную встречу в WhatsApp
+			</a>
+			
+			<a href="https://wa.me/972506403106?text=Здравствуйте!%20Хотела%20бы%20получить%20объяснение,%20как%20это%20работает."
+			   class="secondary-cta"
+			   target="_blank"
+			   onclick="onWhatsappClick('How it works CTA', event)">
+			   Как это работает?
+			</a>
+        </div>
+		
+<p class="opening-sub">
+    Иногда важно просто остановиться и спокойно посмотреть на свою ситуацию.
+    Когда внутри много вопросов, а ответов почти нет — остаётся тревога,
+    сомнения и ощущение, что «что-то не так», но трудно понять, что именно.
+    На личной встрече мы в спокойной атмосфере смотрим на вашу ситуацию
+    через расклад карт: видим скрытые влияния, эмоциональные узлы,
+    реальные тенденции и возможные направления.
+</p>
+		
 
-        <p class="opening-sub">
-            Я не даю пустых обещаний и не пугаю. Моя задача - помочь вам увидеть картину яснее,
-            почувствовать внутреннюю опору и выйти со встречи спокойнее, чем вы пришли.
-        </p>
+<p class="opening-sub">
+    Я не даю пустых обещаний и не пугаю.
+    Моя задача — помочь вам увидеть картину яснее,
+    почувствовать внутреннюю опору и выйти со встречи спокойнее,
+    чем вы пришли.
+</p>
 
         <div class="opening-location">
             Личные встречи у меня дома в Рамат-Гане 🔮
         </div>
 
 		<p class="opening-note">
-			Опыт более 25 лет • Индивидуальный и бережный подход
+			без обязательств - спокойно обсудим, подойдёт ли вам встреча
 		</p>
 
-        <div class="cta-wrap">		
-			<a class="cta-btn"
-			   href="https://wa.me/972506403106?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BF%D0%BE%20%D0%BA%D0%B0%D1%80%D1%82%D0%B0%D0%BC"
-			   target="_blank"
-			   onclick="onWhatsappClick('Записаться на встречу в WhatsApp',event)">
-				Записаться на встречу в WhatsApp
-			</a>
-        </div>
+		<p class="opening-note">
+			• Опыт более 25 лет • Индивидуальный и бережный подход 
+		</p>
+		
+		<p class="opening-note muted">
+			Конфиденциально • без давления • в вашем темпе
+		</p>
+
     </section>
 
     <!-- ABOUT -->
@@ -761,14 +897,15 @@ function onWhatsappClick(clickName, e) {
                 <img src="3.jpeg" alt="Карты, свечи и стол для расклада">
             </div>
 
-            <div class="prev" onclick="plusSlides(-1)">❮</div>
-            <div class="next" onclick="plusSlides(1)">❯</div>
+<div class="prev" onclick="trackGallery('prev')">❮</div>
+<div class="next" onclick="trackGallery('next')">❯</div>
+
         </div>
 
         <div class="gallery-dots">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
+<span class="dot" onclick="trackGalleryDot(1)"></span>
+<span class="dot" onclick="trackGalleryDot(2)"></span>
+<span class="dot" onclick="trackGalleryDot(3)"></span>
         </div>
     </section>
 
@@ -935,6 +1072,13 @@ function onWhatsappClick(clickName, e) {
     </section>
 
 </div>
+
+<a class="sticky-whatsapp"
+   href="https://wa.me/972506403106?text=Здравствуйте%2C%20хочу%20записаться%20на%20встречу"
+   target="_blank"
+   onclick="onWhatsappClick('Sticky WhatsApp CTA', event)">
+   💬 Написать в WhatsApp
+</a>
 
 </body>
 </html>
